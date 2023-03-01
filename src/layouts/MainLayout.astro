@@ -2,6 +2,8 @@
 import MainHead from "./MainHead.astro";
 
 import "../styles/global.css";
+import Footer from "../components/Footer.astro";
+import Nav from "../components/Nav.astro";
 
 interface Props {
   title: string;
@@ -14,8 +16,11 @@ const { title, description = "Default description" } = Astro.props;
   <MainHead title={title} description={description} />
 
   <body>
+    <Nav />
     <slot>Default Content</slot>
-    <p>Before named slot</p>
-    <slot name="hi" />
+
+    <!-- <p>Before named slot</p>
+    <slot name="hi" /> -->
+    <Footer />
   </body>
 </html>
