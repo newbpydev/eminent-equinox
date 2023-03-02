@@ -1,0 +1,59 @@
+---
+// library import
+import { Image } from "@astrojs/image/components";
+
+// component import
+import MainLayout from "./MainLayout.astro";
+
+//utils imports
+import { formatDate, slugify } from "../scripts/utils";
+import PostHeader from "../components/PostHeader.astro";
+
+export interface Frontmatter {
+  title: string;
+  date: string;
+  author: string;
+  image: { src: string; alt: string };
+  description: string;
+  draft: boolean;
+  category: string;
+  file: string;
+  url: string;
+}
+
+interface Props {
+  frontmatter: Frontmatter;
+}
+
+const { frontmatter } = Astro.props;
+const {
+  author,
+  category,
+  date,
+  description,
+  draft,
+  file,
+  image: { alt, src },
+  title,
+  url,
+} = frontmatter;
+---
+
+<MainLayout title={title} description={description}>
+  <PostHeader
+    author={author}
+    alt={alt}
+    title={title}
+    category={category}
+    src={src}
+    date={date}
+  />
+
+  <div class="post-content">
+    <div class="content">
+      <slot />
+    </div>
+
+    <div class="sidebar"></div>
+  </div>
+</MainLayout>

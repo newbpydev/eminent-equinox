@@ -17,7 +17,9 @@ const { title, description = "Default description" } = Astro.props;
 
   <body>
     <Nav />
-    <slot>Default Content</slot>
+    <main>
+      <slot>Default Content</slot>
+    </main>
 
     <!-- <p>Before named slot</p>
     <slot name="hi" /> -->

@@ -1,8 +1,34 @@
 ---
+import { Image } from "@astrojs/image/components";
+
+import Link from "../components/Link.astro";
 import MainLayout from "../layouts/MainLayout.astro";
 ---
 
 <MainLayout title="About Page" description="This is not default description">
-  <p>Hi from about</p>
-  <p slot="hi">something</p>
+  <section class="container about" aria-label="About Me">
+    <Image
+      src="/images/headshot.jpg"
+      alt="My headshot"
+      width={200}
+      height={330}
+      format="webp"
+    />
+
+    <div class="content">
+      <h1 class="h1">My Blog</h1>
+      <p>
+        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tempore natus
+        laboriosam dolorum nesciunt quisquam dignissimos, ad illum facilis
+        provident alias nemo iure totam aliquam, modi quia mollitia. Facere,
+        debitis quam?
+      </p>
+    </div>
+    <Link
+      href="mailto:chris@codinginpublic.dev"
+      style="primary"
+      text="Contact Me"
+    />
+  </section>
+  <!-- <p slot="hi">something</p> -->
 </MainLayout>
