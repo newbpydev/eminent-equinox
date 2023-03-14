@@ -1,26 +1,24 @@
 ---
+import type { MarkdownInstance } from "astro";
+import PostCard from "../../components/PostCard.astro";
+import type { Frontmatter } from "../../layouts/BlogPostLayout.astro";
 import MainLayout from "../../layouts/MainLayout.astro";
+
+const allPosts: MarkdownInstance<Frontmatter>[] = await Astro.glob("./*.md");
+// console.log(allPosts);
 ---
 
 <MainLayout title="My Blog">
-  <ul>
-    <li>
-      <a href="./post-1/">Post 1</a>
-    </li>
-    <li>
-      <a href="./post-2/">Post 2</a>
-    </li>
-    <li>
-      <a href="./post-3/">Post 3</a>
-    </li>
-    <li>
-      <a href="./post-4/">Post 4</a>
-    </li>
-    <li>
-      <a href="./post-5/">Post 5</a>
-    </li>
-    <li>
-      <a href="./post-6/">Post 6</a>
-    </li>
-  </ul>
+  {
+    (
+      // allPosts.map((post) => {
+      //   return <PostCard post={post} />;
+      // })
+      <PostCard
+        frontmatter={allPosts[0].frontmatter}
+        url={allPosts[0].url}
+        tagType="h2"
+      />
+    )
+  }
 </MainLayout>

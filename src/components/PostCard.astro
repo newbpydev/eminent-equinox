@@ -1,0 +1,72 @@
+---
+import { Image } from "@astrojs/image/components";
+import type { JSXTransformConfig } from "astro";
+import type { HTMLAttributes } from "astro/types";
+
+import type { Frontmatter } from "../layouts/BlogPostLayout.astro";
+import { formatDate, slugify } from "../scripts/utils";
+import Link from "./Link.astro";
+
+// interface Props {
+//   post: {
+//     frontmatter: Frontmatter;
+//   };
+//   url?: string;
+//   tagType: any;
+// }
+const { frontmatter, url, tagType } = Astro.props;
+
+const Tag = tagType;
+
+// const tag: HTMLAttributes<`h${1}`> = a
+// console.log(typeof tag);
+
+const {
+  author,
+  category,
+  date,
+  description,
+  draft,
+  file,
+  image: { alt, src },
+  title,
+  // url,
+} = frontmatter;
+---
+
+<!-- <pre>{JSON.stringify(frontmatter, null, 2)}</pre> -->
+<article class="card">
+  <small>
+    <a href={`/category/${slugify(category)}/`} class="badge">{category}</a>
+  </small>
+
+  <a href={url}>
+    <Image
+      src={src}
+      alt={alt}
+      width={400}
+      height={250}
+      format="webp"
+      fit="cover"
+      quality={80}
+      aspectRatio="4:1"
+    />
+    <div class="content">
+      <div>
+        <Tag class="h3">
+          <a href={url}>{title}</a>
+        </Tag>
+        <small>
+          by <a href={`/author/${slugify(author)}/`}>{author}</a> • {
+            formatDate(date)
+          }
+        </small>
+      </div>
+
+      <p>{description}</p>
+      <Link href={url} text="Read Post" style="secondary" />
+    </div>
+  </a>
+
+  <!-- <img src={src} alt={alt} /> -->
+</article>
